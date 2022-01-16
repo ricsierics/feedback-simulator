@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="feedback.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./bootstrap.css" type="text/css">
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+    
+    <body style="margin-left: 50px;">
+        <div ng-app="myFeedback" ng-controller="feedbackCtrl">
+            <h3>{{ this.title }}</h3>
+            <div ng-repeat="result in this.results">
+                <div class="feedback-container">
+                    <span ng-click="sendFeedback(false, result.id)"
+                        title="Rate your search experience"
+                        uib-popover="Thanks"
+                        popover-trigger="'outsideClick'"
+                        ng-class="{
+                            'feedback-up-unselected' : !this.feedbackUpTogglerList[result.id],
+                            'feedback-up-selected' : this.feedbackUpTogglerList[result.id],
+                            'no-hover' : this.feedbackIsBadCollection[result.id]
+                        }"
+                    ></span>
+                    <span class="feedback-separator">|</span>
+                    <span
+                        title="Rate your search experience"
+                        uib-popover-template="this.templates[result.id]"
+                        popover-trigger="'none : outsideClick'"
+                        ng-class="{
+                            'feedback-down-unselected' : !this.feedbackIsBadCollection[result.id],
+                            'feedback-down-selected' : this.feedbackIsBadCollection[result.id],
+                            'no-hover' : this.feedbackUpTogglerList[result.id] || this.feedbackIsBadCollection[result.id] 
+                        }"
+                        my-directive
+                        attr="this.feedbackUpTogglerList[result.id]"
+                    ></span>
+                </div>
+                <br />
+            </div>
+        </div>
+    </body>
+    <script src="./feedbackController.js"></script>
+</html>

@@ -1,0 +1,64 @@
+.feedback-container {
+    background-color: lightgray;
+    width: 72px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 4px;
+}
+
+.feedback-separator {
+    cursor: default;
+}
+
+.feedback-up-unselected {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up.svg");
+    background-repeat: no-repeat;
+    padding: 0px 10px 0 14px;
+    cursor: pointer;
+}
+
+.feedback-up-unselected:hover {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up-hover.svg");
+    background-repeat: no-repeat;
+    padding: 0px 10px 0 14px;
+}
+
+.feedback-up-selected {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up-hover.svg");
+    background-repeat: no-repeat;
+    padding: 0px 10px 0 14px;
+    cursor: pointer;
+}
+
+.feedback-down-unselected {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up.svg");
+    background-repeat: no-repeat;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: -5px;
+    display: inline-block;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+.feedback-down-unselected:hover {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up-hover.svg");
+    background-repeat: no-repeat;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: -5px;
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+.feedback-down-selected {
+    background-image: url("https://d10ycw4r6sgaqt.cloudfront.net/images/thumbs-up-hover.svg");
+    background-repeat: no-repeat;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: -5px;
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+.no-hover {
+    pointer-events: none;
+}
