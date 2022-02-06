@@ -17,24 +17,25 @@
                         title="Rate your search experience"
                         uib-popover="Thanks"
                         popover-trigger="'outsideClick'"
+                        popover-trigger_testing="this.feedbackUpTogglerList[result.id] ? 'outsideClick' : 'none'"
                         ng-class="{
                             'feedback-up-unselected' : !this.feedbackUpTogglerList[result.id],
                             'feedback-up-selected' : this.feedbackUpTogglerList[result.id],
                             'no-hover' : this.feedbackIsBadCollection[result.id]
                         }"
+                        my-directive
+                        shown="this.shown[result.id]"
                     ></span>
-                    <span class="feedback-separator">|</span>
+                    <span class="feedback-divider">|</span>
                     <span
                         title="Rate your search experience"
-                        uib-popover-template="this.templates[result.id]"
-                        popover-trigger="'none : outsideClick'"
+                        uib-popover-template="this.templates[result.id] ? this.thanks : this.template"
+                        popover-trigger="'outsideClick'"
                         ng-class="{
                             'feedback-down-unselected' : !this.feedbackIsBadCollection[result.id],
                             'feedback-down-selected' : this.feedbackIsBadCollection[result.id],
                             'no-hover' : this.feedbackUpTogglerList[result.id] || this.feedbackIsBadCollection[result.id] 
                         }"
-                        my-directive
-                        attr="this.feedbackUpTogglerList[result.id]"
                     ></span>
                 </div>
                 <br />

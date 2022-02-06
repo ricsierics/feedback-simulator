@@ -4,26 +4,20 @@ feedbackApp.directive('myDirective', function () {
     return {
       restrict: 'A',
       scope: {
-        attr: '=',
+        shown: '=',
       },
-      link: function(scope, element) {
-        //console.log('directive triggered');
-        scope.$watch('attr', function(attr) {
-            //console.log('attr: ', attr);
-            // console.log('scope: ', scope)
-            // console.log('element: ', element);
-            //console.log('element.span: ', element[0]);
-        //   if (shown) {
-        //     element.popover('show');
-        //   } else {
-        //     element.popover('hide');
-        //   }
+      link: function(scope, element, attrs) {
+        scope.$watch('shown', function(shown) {
+            if (shown) {
+                console.log('shown: ', shown);
+                attrs.$set('popover-trigger', "none");
+            }
         });
       }
     };
 });
 
-feedbackApp.controller('feedbackCtrl', function($scope, $sce) {
+feedbackApp.controller('feedbackCtrl', function($scope, $sce, $timeout) {
 
     $scope.title = 'Feedback simulation';
     $scope.subTitle = 'Reason why bad:'
@@ -35,19 +29,17 @@ feedbackApp.controller('feedbackCtrl', function($scope, $sce) {
     $scope.thanks =  $sce.trustAsResourceUrl("thanks.html");
 
     $scope.templates = [];
-    for(let i = 1; i <= 4; i++){
-        //$scope.templates[i] = $scope.template;
-        $scope.templates[i] = $sce.trustAsResourceUrl("template.html");
-    }
+    $scope.shown = [];
 
     $scope.sendFeedback = (isBad, id, reason = '') => {
-        console.log('Triggered: ', id);
+        //console.log('Triggered: ', id);
             
         if (isBad) {
             $scope.feedbackIsBadCollection[id] = true;
         } else {
             $scope.feedbackUpTogglerList[id] = !$scope.feedbackUpTogglerList[id];
             $scope.feedbackIsBadCollection[id] = false;
+            $scope.shown[id] = !$scope.shown[id];
         }
 
         //Code property/field will be used to represent reverted thumbs up.
@@ -66,12 +58,12 @@ feedbackApp.controller('feedbackCtrl', function($scope, $sce) {
             code: code,
             reason: reason
         };
-        console.log('feedback: ', feedback);
+        //console.log('feedback: ', feedback);
     }
 
     $scope.submit = (reason, id) => {
-        $scope.templates[id] = $sce.trustAsResourceUrl("thanks.html");
-        //$scope.templates[id] = $scope.thanks;
+        $timeout(() => $scope.templates[id] = true, 50);
         $scope.sendFeedback(true, id, reason);
     }
 });
+  
